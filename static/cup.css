@@ -4,13 +4,24 @@ body {
     background-color: #f3f4f6;
 }
 
-img {
-    width: 100px;
-    height: auto;
-    cursor: grab;
-    user-select: none;
+.image-container {
+    position: fixed;
+    width: fit-content;
 }
 
-img:active {
-    cursor: grabbing;
-} 
+img {
+    width: 125px; /* Change size */
+    height: auto;
+    user-select: none;
+    display: block;
+}
+
+.image-handle {
+    position: absolute;
+    left: 0px;
+    top: 35%;
+    width: 20%;
+    height: 30%;
+    cursor: grab;
+    z-index: 10;
+}
