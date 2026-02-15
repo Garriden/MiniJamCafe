@@ -4,6 +4,7 @@ const handle = document.getElementById('dragHandle');
 let isMoving = false;
 let offsetX = 0;
 let offsetY = 0;
+let releasedFromShake = false;
 // bottom offset in px to keep the container above the viewport bottom
 const bottomOffset = 20;
 
@@ -77,6 +78,11 @@ function step(timestamp) {
         isFalling = false;
         vy = 0;
         container.style.top = newY + 'px';
+        // if it was released while shaking, show broken image
+        if (releasedFromShake) {
+            img.src = 'images/caffeBroke.gif';
+            releasedFromShake = false;
+        }
         return;
     }
 
@@ -87,6 +93,8 @@ function step(timestamp) {
 // start gravity when mouseup if container not at bottom
 document.addEventListener('mouseup', (e) => {
     if (!isMoving) return;
+    // remember if we released while shaking
+    releasedFromShake = container.classList.contains('shake');
     isMoving = false;
     // revert image to default when released
     img.src = 'images/caffeDefault.gif';
